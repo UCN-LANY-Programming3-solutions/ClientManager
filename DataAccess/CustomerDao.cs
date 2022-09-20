@@ -55,35 +55,5 @@ namespace DataAccess
 
             throw new NotImplementedException();
         }
-
-        #region Private Helper Methods
-
-        private static string GetConnectionString()
-        {
-            SqlConnectionStringBuilder connStrBuilder = new SqlConnectionStringBuilder
-            {
-                DataSource = @"(localdb)\MSSQLLocalDB",
-                InitialCatalog = "ClientManager",
-                IntegratedSecurity = true
-            };
-
-            return connStrBuilder.ConnectionString;
-        }
-
-        private static Customer MapCustomer(SqlDataReader reader)
-        {
-            return new Customer
-            {
-                Id = Convert.ToInt32(reader[0]),
-                Firstname = reader["Firstname"] as string,
-                Lastname = reader["Lastname"] as string,
-                Address = reader["Address"] as string,
-                Zip = reader["Zip"] as string,
-                City = reader["City"] as string,
-                Phone = reader["Phone"] as string,
-                Email = reader["email"] as string,
-            };
-        }
-        #endregion
     }
 }
