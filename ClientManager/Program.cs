@@ -2,6 +2,7 @@
 using Model;
 
 CustomerDao repository = new();
+int customerId;
 
 while (true)
 {
@@ -12,10 +13,11 @@ while (true)
     Console.WriteLine(" [0] - exit program");
     Console.WriteLine(" [1] - add customer");
     Console.WriteLine(" [2] - show customer");
+    Console.WriteLine(" [3] - delete customer");
     Console.WriteLine();
-
     Console.Write(">");
     var input = Console.ReadLine();
+
 
     switch (input)
     {
@@ -61,8 +63,7 @@ while (true)
         case "2":
             Console.WriteLine();
             Console.Write("Write ID of customer >");
-            Console.WriteLine();
-            if (Int32.TryParse(Console.ReadLine(), out int customerId))
+            if (Int32.TryParse(Console.ReadLine(), out customerId))
             {
                 Console.WriteLine(repository.GetById(customerId));
             }
@@ -70,13 +71,25 @@ while (true)
             Console.WriteLine("Press enter to continue...");
             Console.ReadLine();
             break;
+        case "3":
+            Console.WriteLine();
+            Console.Write("Write ID of customer >");
+            if (Int32.TryParse(Console.ReadLine(), out customerId))
+            {
+                Customer? customer = repository.GetById(customerId);
+                if (customer != null)
+                {
+                    repository.Delete(customer);
+                }
+            }
+            break;
         default:
             break;
     }
 
     Console.Clear();
 }
-    
+
 
 static void PrintCustomers(IEnumerable<Customer> customers)
 {
