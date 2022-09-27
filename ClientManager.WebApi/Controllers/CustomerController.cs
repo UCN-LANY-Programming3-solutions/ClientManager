@@ -1,7 +1,6 @@
 ﻿using ClientManager.WebApi.Model;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc;
-using Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,12 +19,7 @@ namespace ClientManager.WebApi.Controllers
             foreach (var customer in dao.GetAll())
             {
                 // The yield keyword tells the compiler that the method in which it appears is an iterator block
-                yield return new CustomerDto()
-                {
-                    Id = customer.Id,
-                    Name = $"{customer.Firstname} {customer.Lastname}",
-                    Email = customer.Email
-                };
+                yield return CustomerDto.Map(customer);
             }
         }
 
@@ -38,17 +32,28 @@ namespace ClientManager.WebApi.Controllers
         [HttpPost]
         public void Post([FromBody] CustomerDto customer)
         {
-            Customer cust = new() // I would have avoided using the customer type directly to lower coupling
+            if (customer == null)
             {
-                Firstname = customer.Name?.Substring(0, customer.Name.IndexOf(' ')),
-                Lastname = customer.Name?.Substring(customer.Name.IndexOf(' ')),
-                Address = customer.Address,
-                City = customer.City,
-                Email = customer.Email,
-                Phone = customer.Phone,
-                Zip = customer.Zip
-            };
-            int id = dao.Insert(cust); // Vi bruger ikke id'et her, men det er med for eksemplets skyld
+                throw new ArgumentNullException(nameof(customer));
+            }
+            if (customer.Name == null)
+            {
+                throw new ArgumentException("Customer must have a name");
+            }
+            // extracting values from dto
+            string firstname = customer.Name.Substring(0, customer.Name.IndexOf(' '));
+            string lastname = customer.Name.Substring(customer.Name.IndexOf(' '));
+            string? address = customer.Address;
+            string? city = customer.City;
+            string? email = customer.Email;
+            string? phone = customer.Phone;
+            string? zip = customer.Zip;
+
+            // To avoid using the customer type directly for lower coupling
+            // I have created a factory method in the CustomerDao class
+            var newCustomer = CustomerDao.CreateModel(firstname, lastname, address, zip, city, email, phone);
+            
+            int id = dao.Insert(newCustomer); // Vi bruger ikke id'et her, men det er med for eksemplets skyld
         }
 
         [HttpPut("{id}")]
@@ -57,6 +62,11 @@ namespace ClientManager.WebApi.Controllers
             var customer = dao.GetById(id);
             if (customer != null)
             {
+                // it is only allowed to update these data
+                customer.Address = customerDto.Address;
+                customer.City = customerDto.City;   
+                customer.Zip = customerDto.Zip;
+                customer.Phone = customerDto.Phone;
                 customer.Email = customerDto.Email;
                 dao.Update(customer);
             }

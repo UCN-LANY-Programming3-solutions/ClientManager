@@ -10,6 +10,20 @@ namespace DataAccess
             return new CustomerDao();
         }
 
+        public static Customer CreateModel(string firstname, string lastname, string? address, string? zip, string? city, string? email, string? phone)
+        {
+            return new Customer()
+            {
+                Firstname = firstname,
+                Lastname = lastname,
+                Address = address,
+                Zip = zip,
+                City = city,
+                Email = email,
+                Phone = phone,
+            };
+        }
+
         SqlConnectionStringBuilder _connectionStringBuilder;
 
         private CustomerDao()

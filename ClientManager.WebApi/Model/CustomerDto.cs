@@ -2,7 +2,7 @@
 {
     public class CustomerDto
     {
-        public int Id { get; set; } 
+        public int? Id { get; set; } 
         public string? Name { get; set; }
         public string? Address { get; set; }
         public string? Zip { get; set; }
@@ -20,7 +20,11 @@
             {
                 Id = obj.Id,
                 Name = $"{obj.Firstname} {obj.Lastname}",
-                Email = obj.Email
+                Email = obj.Email,
+                Phone = obj.Phone,
+                City = obj.City,
+                Address = obj.Address,
+                Zip = obj.Zip                
             };
         }
     }
