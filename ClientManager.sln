@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{B1F0F55F-1827-45ED-AB3E-9613E0958544}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{B1F0F55F-1827-45ED-AB3E-9613E0958544}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{48DAAE7E-1846-4CA1-B5DE-4730D2D0D836}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{48DAAE7E-1846-4CA1-B5DE-4730D2D0D836}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientManager", "ClientManager\ClientManager.csproj", "{5ECE9C72-793A-425E-AF79-56E2CEE0E955}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientManager", "ClientManager\ClientManager.csproj", "{5ECE9C72-793A-425E-AF79-56E2CEE0E955}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientManager.WebApi", "ClientManager.WebApi\ClientManager.WebApi.csproj", "{42660E80-9F33-4685-AE04-7075D23A72B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{5ECE9C72-793A-425E-AF79-56E2CEE0E955}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5ECE9C72-793A-425E-AF79-56E2CEE0E955}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5ECE9C72-793A-425E-AF79-56E2CEE0E955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42660E80-9F33-4685-AE04-7075D23A72B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42660E80-9F33-4685-AE04-7075D23A72B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42660E80-9F33-4685-AE04-7075D23A72B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42660E80-9F33-4685-AE04-7075D23A72B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

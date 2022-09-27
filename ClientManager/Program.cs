@@ -1,7 +1,7 @@
 ﻿using DataAccess;
 using Model;
 
-CustomerDao repository = new();
+CustomerDao repository = CustomerDao.Create();
 int customerId;
 
 while (true)
